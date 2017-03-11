@@ -1,0 +1,21 @@
+version: '2'
+services:
+  web:
+    image: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./html:/usr/share/nginx/html
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
+      - ./logs/nginx/log:/var/log/nginx
+    depends_on:
+      - worker
+      - worker2
+  worker:
+    image: tutum/hello-world
+    ports:
+      - "80"
+  worker2:
+    image: tutum/hello-world
+    ports:
+      - "80"
